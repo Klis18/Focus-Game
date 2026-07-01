@@ -1,0 +1,20 @@
+<div class="w-full p-4 my-4 rounded-xl bg-white">
+    <form [formGroup]="taskForm" class="flex flex-wrap gap-2">
+        <input type="text" class="px-2 py-1.5 w-1/3  bg-white border border-gray-200 rounded-xl text-sm text-gray-700
+               hover:border-violet-400 focus:outline-none focus:ring-2
+               focus:ring-violet-300 transition-all shadow-sm" formControlName="description" placeholder="Escribe aquí tu tarea...">
+        <select name="difficult" id="difficult" value="" formControlName="difficult" class="px-2 py-1.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700
+               hover:border-violet-400 focus:outline-none focus:ring-2
+               focus:ring-violet-300 transition-all shadow-sm">
+                <option value=""disabled>Complejidad</option>
+                @for(difficultLevel of difficult; track difficultLevel){
+                    <option [value]="difficultLevel">{{difficultLevel}}</option>
+                }
+        </select>
+        <datepicker (sendSelectedDate)="getSelectedDate($event)"></datepicker>
+        <button type="submit" class="px-2 py-1.5 bg-violet-400 fill-white hover:bg-violet-300 hover:text-violet-700 border hover:border-violet-700 hover:fill-violet-700 text-white rounded-xl flex items-center gap-1" (click)="saveTask()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM565-275q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z"/></svg>
+            <span>Agregar</span>
+        </button>  
+    </form>
+</div>

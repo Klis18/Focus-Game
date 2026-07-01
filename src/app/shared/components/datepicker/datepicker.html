@@ -1,0 +1,67 @@
+<div class="relative w-72" (clickOutside)="close()">
+
+  <!-- Trigger -->
+  <button (click)="toggle()"
+    class="w-full flex items-center justify-between px-4 py-2.5
+           bg-white border border-gray-200 rounded-xl text-sm text-gray-700
+           hover:border-violet-400 focus:outline-none focus:ring-2
+           focus:ring-violet-300 transition-all shadow-sm">
+    <span class="font-medium">{{ displayDate }}</span>
+    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+         stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+    </svg>
+  </button>
+
+  <!-- Calendario -->
+  <div *ngIf="isOpen"
+       class="absolute z-50 mt-2 w-full bg-white border border-gray-100
+              rounded-2xl shadow-xl p-4">
+
+    <!-- Navegación -->
+    <div class="flex items-center justify-between mb-3">
+      <button (click)="prevMonth()"
+        class="p-1.5 rounded-lg hover:bg-violet-50 text-gray-500
+               hover:text-violet-600 transition-colors">‹</button>
+      <span class="text-sm font-semibold text-gray-800">{{ monthLabel }}</span>
+      <button (click)="nextMonth()"
+        class="p-1.5 rounded-lg hover:bg-violet-50 text-gray-500
+               hover:text-violet-600 transition-colors">›</button>
+    </div>
+
+    <!-- Encabezados días -->
+    <div class="grid grid-cols-7 mb-1">
+      <span *ngFor="let d of weekDays"
+            class="text-center text-xs font-medium text-gray-400 py-1">
+        {{ d }}
+      </span>
+    </div>
+
+    <!-- Grilla de días -->
+    <div class="grid grid-cols-7 gap-y-1">
+      <button *ngFor="let day of calendarDays"
+        (click)="selectDate(day)"
+        [disabled]="!day.date"
+        [ngClass]="{
+          'bg-violet-600 text-white shadow-sm': isSelected(day),
+          'bg-violet-50 text-violet-700 border border-violet-200 font-bold': day.isToday && !isSelected(day),
+          'text-violet-400 hover:bg-violet-50': day.isWeekend && !isSelected(day) && !day.isToday,
+          'text-gray-700 hover:bg-gray-50': !day.isWeekend && !isSelected(day) && !day.isToday,
+          'invisible': !day.date
+        }"
+        class="w-full aspect-square rounded-lg text-xs font-medium
+               transition-all flex items-center justify-center">
+        {{ day.day }}
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between">
+      <button (click)="goToToday()"
+        class="text-xs text-violet-600 font-medium hover:underline">Hoy</button>
+      <button (click)="clear()"
+        class="text-xs text-gray-400 hover:text-gray-600">Limpiar</button>
+    </div>
+  </div>
+</div>
