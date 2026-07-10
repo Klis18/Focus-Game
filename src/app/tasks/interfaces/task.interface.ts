@@ -3,7 +3,7 @@ export interface Task{
     description: string;
     difficult: difficultLevel;
     deadline: Date,
-    state: stateLevel
+    state: stateLevel,
 }
 
 export enum difficultLevel{

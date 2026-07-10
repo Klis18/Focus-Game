@@ -13,9 +13,9 @@ export class Layout {
 
   section = signal('misiones')
 
-  changeSection(){
+  changeSection(section: string){
     this.section.update((sectionName) =>
-      sectionName == 'misiones'? 'tienda':'misiones'
+      sectionName = section
      )
   }
 }
