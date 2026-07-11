@@ -1,0 +1,7 @@
+<div class="grid grid-cols-3 gap-4">
+    @for(product of productList(); track product.id){
+        <div>
+            <shop-product-item [productData]="product"></shop-product-item>
+        </div>
+    }
+</div>

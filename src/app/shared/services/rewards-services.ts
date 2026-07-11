@@ -49,5 +49,9 @@ export class RewardsServices {
     this.gameLevel.update((actualLevel)=> actualLevel+=1);
     this.totalExperience.update((actualXP) => actualXP = 0);
   }
+
+  getReward(productPrice:number){
+    this.totalCoins.update((actualCoins) => actualCoins-=productPrice);
+  }
   
 }
