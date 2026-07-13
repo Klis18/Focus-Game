@@ -18,6 +18,25 @@
                     <img src="/icons/coin2.png" alt="coin" class="size-8">
                     <span>{{totalCoins()}}</span>
                 </p>
+                <div class="mt-4">
+                    <hr>
+                    <h3 class="text-xs my-2">Misiones de la semana</h3>
+                    <hr>
+                    <div class="grid grid-cols-3 mt-4">
+                        <div class="grid place-items-center gap-2 text-cyan-400 ">
+                            <b class="mr-2 text-xs">Total</b>
+                            <span class="text-4xl">{{totalWeekTasks()}}</span>
+                        </div>
+                        <div class="grid place-items-center gap-2 text-lime-400">
+                            <b class="text-xs">Completadas</b>
+                            <span class="text-4xl">{{weekCompletedTasks()}}</span>
+                        </div>
+                        <div class="grid place-items-center gap-2 text-rose-400">
+                            <b class="text-xs">Pendientes</b>
+                            <span class="text-4xl">{{weekPendingTasks()}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

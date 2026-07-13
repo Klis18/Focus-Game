@@ -18,11 +18,17 @@
             <task-form></task-form>
         </div>
     }
-    @for(mission of missionList(); track mission.id){
-        @if(mission.state == taskState){
+    @if(missionList().length > 0){
+
+        @for(mission of missionList(); track mission.id){
             <div class="mb-1">
                 <task-item [taskData]="mission"></task-item>
             </div>  
-         }
+        }
+    }
+    @else {
+        <div class="p-8 text-center">
+            <span>No tienes misiones pendientes.</span>
+        </div>
     }
 </div>

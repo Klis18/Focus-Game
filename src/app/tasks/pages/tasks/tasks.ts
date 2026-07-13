@@ -16,10 +16,7 @@ export class Tasks {
   section = signal('misiones');
   isShowMisionForm = signal(false);
   taskService = inject(TasksService);
-  missionList = computed(() =>this.taskService.tasksList());
-
-
-  taskState = stateLevel.pending;
+  missionList = computed(() =>this.taskService.tasksList().filter((tasks) => tasks.state == stateLevel.pending));
 
   changeSection(){
     this.section.update((sectionName) =>
