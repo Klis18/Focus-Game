@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable, signal} from '@angular/core';
 import { stateLevel, Task } from '../interfaces/task.interface';
 import { RewardsServices } from '../../shared/services/rewards-services';
 
@@ -7,31 +7,37 @@ import { RewardsServices } from '../../shared/services/rewards-services';
 })
 export class TasksService {
 
-  tasksList: Task[] = []
+  tasksList = signal<Task[]>(JSON.parse(localStorage.getItem('Missions') ?? '[]'));
   rewardServices = inject(RewardsServices);
 
-  getTasks(){
-    return this.tasksList;
+  constructor(){
+    effect(() =>{
+       localStorage.setItem('Missions', JSON.stringify(this.tasksList()));
+    });
   }
 
-  addTask(task: Task){
-    this.tasksList.push(task);
-    console.log('Tarea Agregada:', this.tasksList)
+  addTask(newTask: Task){
+    this.tasksList.update((tasks) =>
+      [...tasks, newTask],
+    );
   }
 
   updateTask(id: string){
-    this.tasksList.filter((task) => 
-    {
-      if(task.id == id){
-        task.state = stateLevel.ready
-        this.rewardServices.addReward(task.difficult);
-      }
-      else{
-        console.log('Tarea no encontrada')
-      }
-    }
-  );
+    const task = this.tasksList().find((tasks) => tasks.id == id);
 
+    if (!task) return;
+
+    if(task.state == stateLevel.ready) return;
+
+    this.rewardServices.addReward(task.difficult);
+
+
+    this.tasksList.update((tasks) =>
+      tasks.map(task => 
+        task.id === id 
+        ?{...task, state:stateLevel.ready}
+        :task
+    ))
   }
   
 }

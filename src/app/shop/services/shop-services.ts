@@ -37,12 +37,6 @@ export class ShopServices {
       description: '1 Día libre',
       price: 250,
       image: 'images/free-day.png'
-    },
-    {
-      id: uuidv4(),
-      image: 'images/heart-time.png',
-      description: 'Heart Time',
-      price: 350
     }
   ];
 

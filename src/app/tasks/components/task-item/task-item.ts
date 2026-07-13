@@ -17,7 +17,8 @@ export class TaskItem {
   taskService = inject(TasksService);
 
   getDateFormated({deadline}:Task){
-    return `${deadline.getDate()}/${this.months[deadline.getMonth()]}/${deadline.getFullYear()}`
+    const date = new Date(deadline);
+    return `${date.getDate()}/${this.months[date.getMonth()]}/${date.getFullYear()}`
   }
 
   completeMision(taskId:string){

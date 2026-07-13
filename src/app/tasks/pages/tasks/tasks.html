@@ -1,9 +1,15 @@
 <div class="flex items-center gap-4">
     <h1 class="text-2xl">Misiones</h1>
-    <button class="my-4 bg-pink-700 rounded-xl px-3 py-2 flex items-center justify-center gap-2" (click)="showMisionForm()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
-        <span>Nueva</span>
-    </button>
+    <button class="my-4 rounded-xl px-3 py-2 flex items-center justify-center gap-2" [ngClass]="{'bg-pink-700':isShowMisionForm() == false, 'bg-gray-700': isShowMisionForm() == true}" (click)="showMisionForm()">
+        @if(!isShowMisionForm()){
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
+            <span>Nueva</span>
+        }
+        @else {
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+            <span>Cerrar</span>
+        }
+    </button> 
 </div>
 <hr/>
 <div class="mt-4">
@@ -12,9 +18,11 @@
             <task-form></task-form>
         </div>
     }
-    @for(mission of missionList; track mission.id){
-        <div class="mb-1">
-            <task-item [taskData]="mission"></task-item>
-        </div>
+    @for(mission of missionList(); track mission.id){
+        @if(mission.state == taskState){
+            <div class="mb-1">
+                <task-item [taskData]="mission"></task-item>
+            </div>  
+         }
     }
 </div>

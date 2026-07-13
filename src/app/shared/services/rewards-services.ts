@@ -40,7 +40,6 @@ export class RewardsServices {
     this.totalCoins.update((actualCoins) => actualCoins += coins);
     this.totalExperience.update((actualXP) => actualXP += experience);
     this.upLevel();
-    
   }
 
   upLevel(){
