@@ -20,4 +20,8 @@ export class GamerProfile {
   weekCompletedTasks = computed(() => this.tasksServices.tasksList().filter((tasks) => tasks.state == stateLevel.ready).length);
   weekPendingTasks = computed(() => this.tasksServices.tasksList().filter((tasks) => tasks.state == stateLevel.pending).length);
 
+  clearStorage(){
+    this.tasksServices.deleteMissions();
+  }
+
 }

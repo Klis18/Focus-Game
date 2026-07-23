@@ -8,11 +8,12 @@
                     <b>Klis</b>
                     <span class="py-0.5 px-1 ml-2 bg-cyan-500 text-white text-xs rounded-2xl">Level {{level()}}</span>
                 </h3>
-                <div class="flex items-center gap-3 my-2">
+                <div class="flex items-center gap-2 my-2">
                     <img src="/icons/experience3.png" alt="xp" class="size-8">
                     <div class="w-full bg-neutral-900 rounded-full">
-                        <div class="bg-violet-400 text-xs font-medium text-white text-center p-0.5 leading-none rounded-full h-4 flex items-center justify-center" [style.width.%]="totalXP()"> {{totalXP()}} XP</div>
+                        <div class="bg-violet-400 text-xs font-medium text-white text-center p-0.5 leading-none rounded-full h-4 flex items-center justify-center" [style.width.%]="totalXP()"></div>
                     </div>
+                    <span class="text-xs">{{totalXP()}}XP</span>
                 </div>
                 <p class="flex items-center gap-3 my-2">
                     <img src="/icons/coin2.png" alt="coin" class="size-8">
@@ -24,19 +25,23 @@
                     <hr>
                     <div class="grid grid-cols-3 mt-4">
                         <div class="grid place-items-center gap-2 text-cyan-400 ">
-                            <b class="mr-2 text-xs">Total</b>
-                            <span class="text-4xl">{{totalWeekTasks()}}</span>
+                            <span class="mr-2 text-xs text-">Total</span>
+                            <span class="text-4xl text-shadow-2xs text-shadow-cyan-200">{{totalWeekTasks()}}</span>
                         </div>
                         <div class="grid place-items-center gap-2 text-lime-400">
-                            <b class="text-xs">Completadas</b>
-                            <span class="text-4xl">{{weekCompletedTasks()}}</span>
+                            <span class="text-xs">Completadas</span>
+                            <span class="text-4xl text-shadow-2xs text-shadow-lime-200">{{weekCompletedTasks()}}</span>
                         </div>
                         <div class="grid place-items-center gap-2 text-rose-400">
-                            <b class="text-xs">Pendientes</b>
-                            <span class="text-4xl">{{weekPendingTasks()}}</span>
+                            <span class="text-xs">Pendientes</span>
+                            <span class="text-4xl text-shadow-2xs text-shadow-rose-200">{{weekPendingTasks()}}</span>
                         </div>
                     </div>
                 </div>
+                <button class="w-full bg-rose-800 hover:bg-rose-500 p-2 cursor-pointer text-sm rounded-xl text-white flex items-center justify-center mt-2" (click)="clearStorage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M292.31-140q-29.92 0-51.12-21.19Q220-182.39 220-212.31V-720h-40v-60h180v-35.38h240V-780h180v60h-40v507.69Q740-182 719-161q-21 21-51.31 21H292.31ZM680-720H280v507.69q0 5.39 3.46 8.85t8.85 3.46h375.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-720ZM376.16-280h59.99v-360h-59.99v360Zm147.69 0h59.99v-360h-59.99v360ZM280-720v520-520Z"/></svg>
+                    <span>Vaciar registros</span>
+                </button>
             </div>
         </div>
     </div>

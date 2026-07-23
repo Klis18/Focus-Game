@@ -39,5 +39,9 @@ export class TasksService {
         :task
     ))
   }
+
+  deleteMissions(){
+    localStorage.removeItem('Missions');
+  }
   
 }

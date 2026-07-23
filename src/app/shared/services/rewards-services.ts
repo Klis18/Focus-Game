@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { Reward } from '../interfaces/rewards.interfaces';
 import { difficultLevel } from '../../tasks/interfaces/task.interface';
 
@@ -7,9 +7,9 @@ import { difficultLevel } from '../../tasks/interfaces/task.interface';
 })
 export class RewardsServices {
 
-  gameLevel       = signal<number>(1);
-  totalCoins      = signal<number>(0);
-  totalExperience = signal<number>(0);
+  gameLevel       = signal<number>(Number(localStorage.getItem('Level') ?? '1'));
+  totalCoins      = signal<number>(Number(localStorage.getItem('Coins') ?? '0'));
+  totalExperience = signal<number>(Number(localStorage.getItem('XP') ?? '0'));
 
   rewards:Reward[]=[
     {
@@ -32,11 +32,20 @@ export class RewardsServices {
     }
   ]
 
+  constructor(){
+    effect(() =>{
+      localStorage.setItem('Coins',this.totalCoins().toString());
+      localStorage.setItem('XP', this.totalExperience().toString());
+      localStorage.setItem('Level', this.gameLevel().toString());
+    })
+  }
+
 
   addReward(taskDifficultLevel:difficultLevel){
     const [{coins, experience}] = this.rewards.filter((reward) =>
       reward.taskDifficult == taskDifficultLevel
     );
+
     this.totalCoins.update((actualCoins) => actualCoins += coins);
     this.totalExperience.update((actualXP) => actualXP += experience);
     this.upLevel();
